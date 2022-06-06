@@ -16,37 +16,39 @@ struct HomeView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     SearchBar()
-                    
-                    HStack {
-                        Text("Trending this week")
-                            .bold()
-                            .multilineTextAlignment(.trailing)
-                            .padding(.leading, 20)
-                        
-                        Spacer()
-                        Text("View all >")
-                            .multilineTextAlignment(.leading)
-                            .foregroundColor(Color(#colorLiteral(red: 0.9580881, green: 0.10593573, blue: 0.3403331637, alpha: 1)))
-                            .padding(.trailing, 20)
-                    }
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    VStack {
                         HStack {
-                            ForEach(coursesData) { course in
-                                NavigationLink(
-                                    destination: DetailView(course: course),
-                                    label: {
-                                        TrendingView(trendingCourse: course)
-                                            .background(Color.white)
-                                            .cornerRadius(15)
-                                            .shadow(radius: 1)
-                                    })
-                                    .buttonStyle(PlainButtonStyle())
-                            }
-                            .padding(.bottom, 10)
-                            .padding(.leading, 30)
+                            Text("Trending this week")
+                                .bold()
+                                .multilineTextAlignment(.trailing)
+                                .padding(.leading, 20)
                             
+                            Spacer()
+                            Text("View all >")
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(Color.green)
+                                .padding(.trailing, 20)
                         }
-                    }
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(coursesData) { course in
+                                    NavigationLink(
+                                        destination: DetailView(course: course),
+                                        label: {
+                                            TrendingView(trendingCourse: course)
+                                                .background(Color.white)
+                                                .cornerRadius(15)
+                                                .shadow(radius: 1)
+
+
+                                        })
+                                        .buttonStyle(PlainButtonStyle())
+                                }
+                                .padding(.bottom, 10)
+                                .padding(.leading, 30)
+                                
+                            }
+                        }
                     
                 }.padding(.top, -50)
                     .opacity(self.hero ? 0 : 1)
@@ -145,12 +147,14 @@ struct HomeView: View {
                 Spacer()
                 
             }
-        }
+        } .edgesIgnoringSafeArea(.top)
+                
 //        NavigationView {
 //            CourseList(courses: $coursesData)
 //            .navigationBarTitle("Courses")
 //                .foregroundColor(Color.black)
 //        }
+    }
     }
 }
 
